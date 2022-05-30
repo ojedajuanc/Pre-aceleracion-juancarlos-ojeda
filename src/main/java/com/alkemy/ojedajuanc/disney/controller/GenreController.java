@@ -33,7 +33,7 @@ public class GenreController {
 		if(savedGenre != null) {
 			return new ResponseEntity<GenreDTO>(savedGenre, HttpStatus.CREATED);
 		} else {
-			return new ResponseEntity<GenreDTO>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<GenreDTO>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
