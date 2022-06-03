@@ -18,4 +18,6 @@ public interface MediaService {
 
 	Optional<MediaDTO> updateMedia(Long id, MediaUpdateDTO media);
 
+	void deleteMedia(Long id);
+
 }

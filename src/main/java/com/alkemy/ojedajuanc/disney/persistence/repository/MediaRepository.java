@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +17,9 @@ public interface MediaRepository extends JpaRepository<Media, Long>{
 	List<Media> findAllActive();
 	
 	Optional<Media> findByIdAndActiveTrue(Long id);
+	
+	@Modifying
+	@Query("UPDATE Media u SET u.active = false WHERE u.id = ?1")
+	void softDelete(Long id);
 
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alkemy.ojedajuanc.disney.domain.MediaBasicDTO;
 import com.alkemy.ojedajuanc.disney.domain.MediaDTO;
@@ -39,6 +40,7 @@ public class MediaServiceImpl implements MediaService {
 	}
 
 	@Override
+	@Transactional
 	public MediaDTO createMedia(MediaPostDTO newMedia) {
 		if (!newMedia.getTipo().equalsIgnoreCase("PELICULA") && !newMedia.getTipo().equalsIgnoreCase("SERIE")) {
 			return null;
@@ -55,6 +57,7 @@ public class MediaServiceImpl implements MediaService {
 	}
 
 	@Override
+	@Transactional
 	public Optional<MediaDTO> updateMedia(Long id, MediaUpdateDTO dto) {
 		Media updatedMedia = mapper.mediaUpdateToEntity(dto);
 		// Only updates Media if active
@@ -68,6 +71,12 @@ public class MediaServiceImpl implements MediaService {
 				media.setTypeName(updatedMedia.getTypeName());
 				return mapper.toDTO(repository.save(media));
 			});
+	}
+
+	@Override
+	@Transactional
+	public void deleteMedia(Long id) {
+		repository.softDelete(id);
 	}
 
 }
