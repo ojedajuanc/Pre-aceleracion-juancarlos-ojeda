@@ -40,33 +40,18 @@ public class MediaServiceImpl implements MediaService {
 
 	@Override
 	public MediaDTO createMedia(MediaPostDTO newMedia) {
-		// TODO: Validar por MediaType antes que por Title
 		if (!newMedia.getTipo().equalsIgnoreCase("PELICULA") && !newMedia.getTipo().equalsIgnoreCase("SERIE")) {
 			return null;
 		}
 		List<Character> cast = new ArrayList<Character>();
 
 		for (Long castId : newMedia.getPersonajes()) {
-			characterRespository.findById(castId).ifPresent(character -> cast.add(character));
+			// Only adds Characters if they are active
+			characterRespository.findByIdAndActiveTrue(castId).ifPresent(character -> cast.add(character));
 		}
 
 		Media newMediaEntity = mapper.mediaPostToEntity(newMedia, cast);
 		return mapper.toDTO(repository.save(newMediaEntity));
-		
-		
-//		if (repository.findByTitleIgnoreCase(newMedia.getTitulo()) == null) {
-//			List<Character> cast = new ArrayList<Character>();
-//
-//			for (Long castId : newMedia.getPersonajes()) {
-//				characterRespository.findById(castId).ifPresent(character -> cast.add(character));
-//			}
-//
-//			Media newMediaEntity = mapper.mediaPostToEntity(newMedia, cast);
-//			return mapper.toDTO(repository.save(newMediaEntity));
-//		} else {
-//			// TODO: retornar badrequest o exception
-//			return null;
-//		}
 	}
 
 	@Override
