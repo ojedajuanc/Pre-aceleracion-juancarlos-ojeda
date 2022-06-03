@@ -7,15 +7,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class MediaDTO {
+public class MediaPostDTO {
 
-	private Long id;
 	private String titulo;
 	private LocalDate fechaCreacion;
 	private String imagen;
 	private Double calificacion;
-	private List<CharacterBasicDTO> personajes;
-	private GenreDTO genero;
+	private List<Long> personajes;
+	private Long idGenero;
 	private String tipo;
-
+	
+	public String setTipo (String tipo) {
+		return this.tipo = tipo.toUpperCase();
+	
+	}
 }
