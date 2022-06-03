@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.alkemy.ojedajuanc.disney.domain.MediaBasicDTO;
 import com.alkemy.ojedajuanc.disney.domain.MediaDTO;
 import com.alkemy.ojedajuanc.disney.domain.MediaPostDTO;
+import com.alkemy.ojedajuanc.disney.domain.MediaUpdateDTO;
 import com.alkemy.ojedajuanc.disney.mapper.MediaMapper;
 import com.alkemy.ojedajuanc.disney.persistence.entity.Character;
 import com.alkemy.ojedajuanc.disney.persistence.entity.Media;
@@ -66,6 +67,22 @@ public class MediaServiceImpl implements MediaService {
 //			// TODO: retornar badrequest o exception
 //			return null;
 //		}
+	}
+
+	@Override
+	public Optional<MediaDTO> updateMedia(Long id, MediaUpdateDTO dto) {
+		Media updatedMedia = mapper.mediaUpdateToEntity(dto);
+		// Only updates Media if active
+		return repository.findByIdAndActiveTrue(id)
+			.map(media -> {
+				media.setTitle(updatedMedia.getTitle());
+				media.setReleaseDate(updatedMedia.getReleaseDate());
+				media.setPictureUrl(updatedMedia.getPictureUrl());
+				media.setRating(updatedMedia.getRating());
+				media.setGenreId(updatedMedia.getGenreId());
+				media.setTypeName(updatedMedia.getTypeName());
+				return mapper.toDTO(repository.save(media));
+			});
 	}
 
 }

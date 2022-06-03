@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alkemy.ojedajuanc.disney.domain.MediaBasicDTO;
 import com.alkemy.ojedajuanc.disney.domain.MediaDTO;
 import com.alkemy.ojedajuanc.disney.domain.MediaPostDTO;
+import com.alkemy.ojedajuanc.disney.domain.MediaUpdateDTO;
 import com.alkemy.ojedajuanc.disney.service.MediaService;
 
 @RestController
@@ -47,6 +49,12 @@ public class MediaController {
 		} else {			
 			return new ResponseEntity<Optional<MediaDTO>>(HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Optional<MediaDTO>> updateMedia(@PathVariable("id") Long id, @RequestBody MediaUpdateDTO media){
+		Optional<MediaDTO> updatedMedia = service.updateMedia(id, media);
+		return new ResponseEntity<Optional<MediaDTO>>(updatedMedia, HttpStatus.OK);
 	}
 
 }

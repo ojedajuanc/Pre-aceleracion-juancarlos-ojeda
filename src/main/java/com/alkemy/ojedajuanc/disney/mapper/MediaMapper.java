@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import com.alkemy.ojedajuanc.disney.domain.MediaBasicDTO;
 import com.alkemy.ojedajuanc.disney.domain.MediaDTO;
 import com.alkemy.ojedajuanc.disney.domain.MediaPostDTO;
+import com.alkemy.ojedajuanc.disney.domain.MediaUpdateDTO;
 import com.alkemy.ojedajuanc.disney.persistence.entity.Character;
 import com.alkemy.ojedajuanc.disney.persistence.entity.Media;
 
@@ -44,5 +45,19 @@ public interface MediaMapper {
 	@Mapping(target = "typeName", source = "dto.tipo")
 	@Mapping(target = "cast", source = "cast")
 	Media mediaPostToEntity (MediaPostDTO dto, List<Character> cast);
+	
+	
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "active", ignore = true)
+	@Mapping(target = "cast", ignore = true)
+	@Mapping(target = "genre", ignore = true)
+	@Mapping(target = "type", ignore = true)
+	@Mapping(target = "genreId", source = "idGenero")
+	@Mapping(target = "pictureUrl", source = "imagen")
+	@Mapping(target = "rating", source = "calificacion")
+	@Mapping(target = "releaseDate", source = "fechaCreacion")
+	@Mapping(target = "title", source = "titulo")
+	@Mapping(target = "typeName", source = "tipo")
+	Media mediaUpdateToEntity(MediaUpdateDTO dto);
 	
 }
