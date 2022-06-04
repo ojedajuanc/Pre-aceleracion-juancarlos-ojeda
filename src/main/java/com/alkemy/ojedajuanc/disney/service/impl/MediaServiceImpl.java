@@ -17,6 +17,8 @@ import com.alkemy.ojedajuanc.disney.persistence.entity.Character;
 import com.alkemy.ojedajuanc.disney.persistence.entity.Media;
 import com.alkemy.ojedajuanc.disney.persistence.repository.CharacterRepository;
 import com.alkemy.ojedajuanc.disney.persistence.repository.MediaRepository;
+import com.alkemy.ojedajuanc.disney.persistence.repository.specification.MediaSpecification;
+import com.alkemy.ojedajuanc.disney.pojos.MediaFilter;
 import com.alkemy.ojedajuanc.disney.service.MediaService;
 
 @Service
@@ -28,6 +30,8 @@ public class MediaServiceImpl implements MediaService {
 	MediaMapper mapper;
 	@Autowired
 	CharacterRepository characterRespository;
+	@Autowired
+	MediaSpecification mediaSpecification;
 
 	@Override
 	public List<MediaBasicDTO> getAll() {
@@ -77,6 +81,14 @@ public class MediaServiceImpl implements MediaService {
 	@Transactional
 	public void deleteMedia(Long id) {
 		repository.softDelete(id);
+	}
+
+	@Override
+	public List<MediaBasicDTO> getMediaByFilters(String title, Long genreId, String order) {
+		MediaFilter filter = new MediaFilter(title, genreId, order);
+		List<Media> list = repository.findAll(mediaSpecification.getByFilters(filter));
+		return mapper.toListBasicDTO(list);
+		
 	}
 
 }

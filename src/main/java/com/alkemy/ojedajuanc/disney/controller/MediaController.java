@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alkemy.ojedajuanc.disney.domain.MediaBasicDTO;
@@ -62,6 +63,15 @@ public class MediaController {
 	public ResponseEntity<Void> deleteMedia(@PathVariable Long id) {
 		service.deleteMedia(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);		
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<MediaBasicDTO>> getMediaByFilters(
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) Long genreId,
+			@RequestParam(required = false, defaultValue = "DESC") String order) {
+		List<MediaBasicDTO> list =  service.getMediaByFilters(title, genreId, order);
+		return new ResponseEntity<List<MediaBasicDTO>>(list, HttpStatus.OK);
 	}
 
 }

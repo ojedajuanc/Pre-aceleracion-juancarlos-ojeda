@@ -20,4 +20,6 @@ public interface MediaService {
 
 	void deleteMedia(Long id);
 
+	List<MediaBasicDTO> getMediaByFilters(String title, Long genreId, String order);
+
 }
