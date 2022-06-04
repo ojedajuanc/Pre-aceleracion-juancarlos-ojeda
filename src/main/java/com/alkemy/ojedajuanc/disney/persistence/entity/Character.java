@@ -1,5 +1,6 @@
 package com.alkemy.ojedajuanc.disney.persistence.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,8 +25,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Character {
+public class Character implements Serializable {
 	
+	private static final long serialVersionUID = 4967899648410358532L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -53,6 +58,7 @@ public class Character {
 			joinColumns = @JoinColumn(name = "character_id"),
 			inverseJoinColumns = @JoinColumn(name = "media_id")
 			)
+	@Where(clause = "active_status = true")
 	private List<Media> filmography;
 
 }

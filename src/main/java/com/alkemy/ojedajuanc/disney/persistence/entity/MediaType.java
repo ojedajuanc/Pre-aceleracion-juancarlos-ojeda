@@ -1,5 +1,7 @@
 package com.alkemy.ojedajuanc.disney.persistence.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "media_type")
-public class MediaType {
+public class MediaType implements Serializable {
 	
+	private static final long serialVersionUID = -1856784550975313133L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
