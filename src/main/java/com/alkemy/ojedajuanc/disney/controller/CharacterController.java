@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,12 @@ public class CharacterController {
 	public ResponseEntity<Optional<CharacterDTO>> getCharacter(@PathVariable("id") Long id) {
 		Optional<CharacterDTO> character = service.getCharacter(id);
 		return new ResponseEntity<Optional<CharacterDTO>>(character, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteCharacter(@PathVariable("id") Long id) {
+		service.deleteCharacter(id);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 
 }

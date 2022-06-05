@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alkemy.ojedajuanc.disney.domain.CharacterBasicDTO;
 import com.alkemy.ojedajuanc.disney.domain.CharacterDTO;
@@ -28,6 +29,12 @@ public class CharacterServiceImpl implements CharacterService {
 	@Override
 	public Optional<CharacterDTO> getCharacter(Long id) {
 		return repository.findById(id).map(media -> mapper.toDTO(media));
+	}
+
+	@Transactional
+	@Override
+	public void deleteCharacter(Long id) {
+		repository.softDeleteById(id);
 	}
 
 }

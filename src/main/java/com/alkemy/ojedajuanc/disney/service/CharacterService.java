@@ -12,4 +12,6 @@ public interface CharacterService {
 
 	Optional<CharacterDTO> getCharacter(Long id);
 
+	void deleteCharacter(Long id);
+
 }
