@@ -14,4 +14,6 @@ public interface CharacterService {
 
 	void deleteCharacter(Long id);
 
+	Optional<CharacterDTO> createCharacter(CharacterDTO newCharacter);
+
 }

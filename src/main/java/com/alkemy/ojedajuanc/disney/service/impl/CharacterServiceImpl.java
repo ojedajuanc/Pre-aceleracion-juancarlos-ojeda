@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alkemy.ojedajuanc.disney.domain.CharacterBasicDTO;
 import com.alkemy.ojedajuanc.disney.domain.CharacterDTO;
 import com.alkemy.ojedajuanc.disney.mapper.CharacterMapper;
+import com.alkemy.ojedajuanc.disney.persistence.entity.Character;
 import com.alkemy.ojedajuanc.disney.persistence.repository.CharacterRepository;
 import com.alkemy.ojedajuanc.disney.service.CharacterService;
 
@@ -35,6 +36,12 @@ public class CharacterServiceImpl implements CharacterService {
 	@Override
 	public void deleteCharacter(Long id) {
 		repository.softDeleteById(id);
+	}
+
+	@Override
+	public Optional<CharacterDTO> createCharacter(CharacterDTO newCharacter) {
+		Character newCharacterEntity = mapper.toEntity(newCharacter);
+		return Optional.of( mapper.toDTO(repository.save(newCharacterEntity)) );
 	}
 
 }

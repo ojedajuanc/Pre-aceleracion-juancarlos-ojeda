@@ -2,6 +2,7 @@ package com.alkemy.ojedajuanc.disney.mapper;
 
 import java.util.List;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -25,5 +26,11 @@ public interface CharacterMapper {
 	@Mapping(target = "nombre", source = "name")
 	@Mapping(target = "peso", source = "weight")
 	CharacterDTO toDTO (Character character);
+	
+	@InheritInverseConfiguration
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "active", ignore = true)
+	@Mapping(target = "filmography", ignore = true)
+	Character toEntity (CharacterDTO dto);
 
 }
