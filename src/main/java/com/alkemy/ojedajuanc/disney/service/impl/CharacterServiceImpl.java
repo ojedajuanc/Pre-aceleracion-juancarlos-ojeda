@@ -43,5 +43,18 @@ public class CharacterServiceImpl implements CharacterService {
 		Character newCharacterEntity = mapper.toEntity(newCharacter);
 		return Optional.of( mapper.toDTO(repository.save(newCharacterEntity)) );
 	}
+	
+	public Optional<CharacterDTO> updateCharacter(Long id, CharacterDTO dto) {
+		Character updatedCharacter = mapper.toEntity(dto);
+		// Only updates Character if active
+		return repository.findByIdAndActiveTrue(id).map(m -> {
+			m.setName(updatedCharacter.getName());
+			m.setAge(updatedCharacter.getAge());
+			m.setWeight(updatedCharacter.getWeight());
+			m.setDescription(updatedCharacter.getDescription());
+			m.setPictureUrl(updatedCharacter.getPictureUrl());
+			return mapper.toDTO(repository.save(m));
+		});
+	}
 
 }
