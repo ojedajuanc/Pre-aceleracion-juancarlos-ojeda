@@ -79,7 +79,13 @@ public class MediaController {
 			@PathVariable("characterId") Long characterId) {
 		service.addCharacter(mediaId, characterId);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
-
+	}
+	
+	@DeleteMapping("/{id}/characters/{characterId}")
+	public ResponseEntity<Void> removeCharacterFromMedia(@PathVariable("id") Long mediaId,
+			@PathVariable("characterId") Long characterId) {
+		service.removeCharacter(mediaId, characterId);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 
 }

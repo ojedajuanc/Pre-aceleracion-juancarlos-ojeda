@@ -102,5 +102,17 @@ public class MediaServiceImpl implements MediaService {
 			repository.save(media);
 		}	
 	}
+	
+	@Override
+	@Transactional
+	public void removeCharacter(Long mediaId, Long characterId) {
+		Optional<Character> character = characterRespository.findByIdAndActiveTrue(characterId);
+		Optional<Media> media = repository.findByIdAndActiveTrue(mediaId);
+		
+		if (character.isPresent() && media.isPresent()) {
+			media.get().removeCharacter(character.get());
+			repository.save(media.get());
+		}
+	}
 
 }

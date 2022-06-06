@@ -97,7 +97,7 @@ public class Media implements Serializable {
 	
 	// TODO: helper method to remove character from cast
 	public void removeCharacter(Character character) {
-		
+		this.cast.remove(character);
 	}
 
 }
