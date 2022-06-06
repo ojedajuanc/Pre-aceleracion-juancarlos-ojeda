@@ -34,19 +34,19 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--  PROD DATABASE
+		<!--  PROD DATABASE -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-		</dependency> -->
+		</dependency> 
 
-		<!-- TEST DATABASE -->
+		<!-- TEST DATABASE 
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
