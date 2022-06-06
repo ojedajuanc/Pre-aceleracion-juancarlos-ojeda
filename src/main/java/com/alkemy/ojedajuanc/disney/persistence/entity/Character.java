@@ -13,6 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.annotations.Where;
 
@@ -33,12 +36,16 @@ public class Character implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Name cannot be empty")
 	@Column(name = "name", nullable = false)
 	private String name;
 	
+	@NotNull(message = "Age cannot be null")
+	@PositiveOrZero(message = "Age must be greater or equal than 0")
 	@Column(name = "age")
 	private Integer age;
 	
+	@PositiveOrZero(message = "Weight must be greater or equal than 0")
 	@Column(name = "weight")
 	private Double weight;
 	

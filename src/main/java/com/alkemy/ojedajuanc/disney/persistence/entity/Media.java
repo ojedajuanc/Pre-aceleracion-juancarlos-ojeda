@@ -43,7 +43,7 @@ public class Media implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Tittle cannot be empty")
+	@NotBlank(message = "Title cannot be empty")
 	@Column(name = "title", nullable = false)
 	private String title;
 	
