@@ -1,5 +1,6 @@
 package com.alkemy.ojedajuanc.disney.persistence.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,8 +22,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Genre {
+public class Genre implements Serializable {
 	
+	private static final long serialVersionUID = 1995104232319309901L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
