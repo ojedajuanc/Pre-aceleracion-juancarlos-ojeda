@@ -91,4 +91,16 @@ public class MediaServiceImpl implements MediaService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void addCharacter(Long mediaId, Long characterId) {
+		Media media = repository.findByIdAndActiveTrue(mediaId).orElse(null);
+		Character character = characterRespository.findByIdAndActiveTrue(characterId).orElse(null);
+		
+		if (media != null && character != null) {
+			media.addCharacter(character);
+			repository.save(media);
+		}	
+	}
+
 }

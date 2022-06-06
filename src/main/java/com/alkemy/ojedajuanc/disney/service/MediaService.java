@@ -22,4 +22,6 @@ public interface MediaService {
 
 	List<MediaBasicDTO> getMediaByFilters(String title, Long genreId, String order);
 
+	void addCharacter(Long mediaId, Long characterId);
+
 }

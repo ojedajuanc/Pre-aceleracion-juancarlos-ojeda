@@ -2,6 +2,7 @@ package com.alkemy.ojedajuanc.disney.persistence.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -86,5 +87,17 @@ public class Media implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "character_id"))
 	@Where(clause = "active_status = true")
 	private List<Character> cast;
+	
+	public void addCharacter(Character character) {
+		if (this.cast == null) {
+			this.cast = new ArrayList<Character>();
+		}
+		this.cast.add(character);
+	}
+	
+	// TODO: helper method to remove character from cast
+	public void removeCharacter(Character character) {
+		
+	}
 
 }

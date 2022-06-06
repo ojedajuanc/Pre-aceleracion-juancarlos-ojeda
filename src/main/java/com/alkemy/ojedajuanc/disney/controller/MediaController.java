@@ -73,5 +73,13 @@ public class MediaController {
 		List<MediaBasicDTO> list =  service.getMediaByFilters(title, genreId, order);
 		return new ResponseEntity<List<MediaBasicDTO>>(list, HttpStatus.OK);
 	}
+	
+	@PostMapping("/{id}/characters/{characterId}")
+	public ResponseEntity<Void> addCharacterToMedia(@PathVariable("id") Long mediaId,
+			@PathVariable("characterId") Long characterId) {
+		service.addCharacter(mediaId, characterId);
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+
+	}
 
 }
